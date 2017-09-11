@@ -16,7 +16,7 @@ public class Forum {
 	@Id
 	private int forumId;
 	private String forumName,forumContent,status;
-	private int likes,userId;
+	private int userId;
 	private Date createDate;
 	public int getForumId() {
 		return forumId;
@@ -42,12 +42,7 @@ public class Forum {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public int getLikes() {
-		return likes;
-	}
-	public void setLikes(int likes) {
-		this.likes = likes;
-	}
+	
 	public int getUserId() {
 		return userId;
 	}
