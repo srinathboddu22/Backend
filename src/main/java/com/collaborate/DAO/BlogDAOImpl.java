@@ -79,9 +79,16 @@ public class BlogDAOImpl implements BlogDAO {
 		
 		try
 		{
-			
+			Blog blog =new Blog();
 			@SuppressWarnings("rawtypes")
-			Query query = (Query) sessionFactory.getCurrentSession().createQuery("update Blog set  blogId=?,blogName=?,blogContent=?,status=?,username=?,likes=?,createDate=? where blogId="+blogId);
+			Query query = (Query) sessionFactory.getCurrentSession().createQuery("update Blog set  blogName=?,blogContent=?,status=?,username=?,likes=?,createDate=? where blogId="+blogId);
+			  
+			  query.setParameter(0,"blog.getBlogName()");
+			  query.setParameter(1,"blog.getBlogContent()");
+			  query.setParameter(2,"blog.getStatus()");
+			  query.setParameter(3,"blog.getUsername()");
+			  query.setParameter(4,blog.getLikes());
+			  query.setParameter(5,blog.getCreateDate());
 			  query.executeUpdate();
 			return true;
 		}
@@ -97,8 +104,9 @@ public class BlogDAOImpl implements BlogDAO {
 		try
 		{
 			
-			sessionFactory.getCurrentSession().delete(blogId);
-			return true;
+		Query query =	(Query)sessionFactory.getCurrentSession().createQuery("delete Blog where blogId="+blogId);
+		query.executeUpdate();	
+		return true;
 		}
 		catch(Exception e)
 		{

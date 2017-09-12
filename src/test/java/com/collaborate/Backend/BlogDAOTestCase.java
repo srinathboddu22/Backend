@@ -51,7 +51,7 @@ public class BlogDAOTestCase {
 	assertTrue("Problem in approving Blog",blogDAO.editBlog(blog.getBlogId()));	
 	}
 	
-	@Ignore
+	
 	@Test
 	public void deleteBlogTest()
 	{
@@ -75,7 +75,6 @@ public class BlogDAOTestCase {
 		blog.setBlogId(111);
 		blog.setBlogName("Dravid");
 		blog.setBlogContent("Dravid is a Cricket Coach");
-		
 		blog.setCreateDate(new java.util.Date());
 		blog.setStatus("NA");
 		blog.setLikes(0);
