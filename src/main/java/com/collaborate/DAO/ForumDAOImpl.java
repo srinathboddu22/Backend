@@ -9,11 +9,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.collaborate.Model.Blog;
 import com.collaborate.Model.Forum;
 
 @Repository("forumDAO")
-public class ForumDAOImpl implements ForumDAO{
+public class ForumDAOImpl implements ForumDAO {
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -38,16 +37,12 @@ public class ForumDAOImpl implements ForumDAO{
 	
 }
 	@Transactional
-	public Forum getForumdetails(int forumId) {
+	public Forum getForum(int forumId) {
 		
 		try
 		{
-			
-			
 			 return  (Forum)sessionFactory.getCurrentSession().createQuery("from Forum where forumId="+forumId);
-			
-			
-		}
+	    }
 		catch(Exception e)
 		{
 			 System.out.println("Exception Arised"+e);
@@ -81,9 +76,16 @@ public class ForumDAOImpl implements ForumDAO{
 		
 		try
 		{
-			
+			Forum forum =new Forum();
 			@SuppressWarnings("rawtypes")
-			Query query = (Query) sessionFactory.getCurrentSession().createQuery("update Forum where forumId="+forumId);
+			Query query = (Query) sessionFactory.getCurrentSession().createQuery("update Forum set  forumId=?,forumName=?,forumContent=?,status=?,userid=?,createDate=? where forumId="+forumId);
+			  
+			  query.setParameter(0,"forum.getForumName()");
+			  query.setParameter(1,"forum.getForumContent()");
+			  query.setParameter(2,"forum.getStatus()");
+			  query.setParameter(3,"forum.getUserId()");
+			  query.setParameter(4,forum.getCreateDate());
+			  query.setParameter(5,"forum.getForumId()");
 			  query.executeUpdate();
 			return true;
 		}
@@ -99,8 +101,9 @@ public class ForumDAOImpl implements ForumDAO{
 		try
 		{
 			
-			sessionFactory.getCurrentSession().delete(forumId);
-			return true;
+		Query query =	(Query)sessionFactory.getCurrentSession().createQuery("delete Forum where forumId="+forumId);
+		query.executeUpdate();	
+		return true;
 		}
 		catch(Exception e)
 		{
@@ -108,6 +111,4 @@ public class ForumDAOImpl implements ForumDAO{
 			return false;
 		}
 	}
-	
-	
 }
