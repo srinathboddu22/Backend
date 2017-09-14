@@ -49,7 +49,7 @@ public class ForumDAOTestCase {
 	assertTrue("Problem in approving forum",forumDAO.editForum(forum.getForumId()));	
 	}
 	
-	
+
 	@Test
 	public void deleteForumTest()
 	{
@@ -65,7 +65,7 @@ public class ForumDAOTestCase {
 	Forum forum = new Forum();
 	forum.setForumId(111);
 	}
-
+	@Ignore
 	@Test
 	public void approveForumTest()
 	{
@@ -73,6 +73,7 @@ public class ForumDAOTestCase {
 		forum.setForumId(111);
 		forum.setForumName("Dravid");
 		forum.setForumContent("Dravid is a Cricket Coach");
+		forum.setUserId(1001);
 		forum.setCreateDate(new java.util.Date());
 		forum.setStatus("NA");
 		assertTrue("Problem in approving Forum",forumDAO.approveForum(forum));	

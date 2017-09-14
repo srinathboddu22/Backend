@@ -78,14 +78,14 @@ public class ForumDAOImpl implements ForumDAO {
 		{
 			Forum forum =new Forum();
 			@SuppressWarnings("rawtypes")
-			Query query = (Query) sessionFactory.getCurrentSession().createQuery("update Forum set  forumId=?,forumName=?,forumContent=?,status=?,userid=?,createDate=? where forumId="+forumId);
+			Query query = (Query) sessionFactory.getCurrentSession().createQuery("update Forum set forumName=?,forumContent=?,status=?,userid=?,createDate=?,forumId=? where forumId="+forumId);
 			  
 			  query.setParameter(0,"forum.getForumName()");
 			  query.setParameter(1,"forum.getForumContent()");
 			  query.setParameter(2,"forum.getStatus()");
-			  query.setParameter(3,"forum.getUserId()");
+			  query.setParameter(3,forum.getUserId());
 			  query.setParameter(4,forum.getCreateDate());
-			  query.setParameter(5,"forum.getForumId()");
+			  query.setParameter(5,forum.getForumId());
 			  query.executeUpdate();
 			return true;
 		}
