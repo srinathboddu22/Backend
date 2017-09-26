@@ -64,6 +64,21 @@ public class UserDAOImpl implements UserDAO{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public boolean isUsernameValid(String username) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean registerUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isEmailValid(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }
