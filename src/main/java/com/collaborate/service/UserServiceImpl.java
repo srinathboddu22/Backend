@@ -20,5 +20,7 @@ public class UserServiceImpl implements UserService{
 	public boolean isEmailValid(String email) {
 		return userDAO.isEmailValid(email);
 	}
-
+public User login(User user){
+	return userDAO login(user);
+}
 }
