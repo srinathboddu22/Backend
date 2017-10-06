@@ -2,6 +2,9 @@ package com.collaborate.DAO;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -71,14 +74,56 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	public boolean registerUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		Session session=sessionFactory.getCurrentSession();
+		try{
+			session.save(user);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
+	public boolean isUserNameValid(String username) {
+		Session session=sessionFactory.getCurrentSession();
 
 	public boolean isEmailValid(String email) {
-		// TODO Auto-generated method stub
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from user where email=?");
+		query.setString
 		return false;
 	}
-	
+	public User login(User user){
+		Session session=sessionFactory.getCurrentSession();
+		Query query=setString(0, user.getUsername());
+		Query query=session.createQuery("from User where username=? and password=?");
+		Query query=setString(0, user.getPassword());
+		user=(User)query.uniqueResult();
+		return user;
+		
+	}
+	public void update(User user){
+		Session session=sessionFactory.getCurrentSession();
+		session.update(user);
+				
+	}
+	public User getUserByUsername(String username){
+		Session session=sessionFactory.getCurrentSession();
+		User user=(User)session.get(User.class,username);
+		return user;
+		
+	}
+	public boolean isUpdatedEmailValid(String email,String username){
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from User where email = ? and username = ?");
+		query.setString(0, email);
+		query.setString(1, username);
+		User user=(User)query.uniqueResult();
+		if(user==null)
+		return true;
+		else
+	    return false;
+		
+		}
 	
 }
