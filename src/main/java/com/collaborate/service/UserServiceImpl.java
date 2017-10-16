@@ -21,6 +21,6 @@ public class UserServiceImpl implements UserService{
 		return userDAO.isEmailValid(email);
 	}
 public User login(User user){
-	return userDAO login(user);
+	return userDAO.login(user);
 }
 }

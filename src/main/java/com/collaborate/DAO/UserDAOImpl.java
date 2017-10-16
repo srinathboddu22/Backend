@@ -3,19 +3,86 @@ package com.collaborate.DAO;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.transaction.Transaction;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.collaborate.Model.User;
 
-@Repository("userDAO")
-public class UserDAOImpl implements UserDAO{	
-	
+@SuppressWarnings("deprecation")
+@Repository
+public class UserDAOImpl implements UserDAO {
+
 	@Autowired
+	private SessionFactory sessionFactory;
+	@Transactional
+	public void saveOrUpdate(User user) {
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
+	}
+
+	@Transactional
+	public void delete(User user) {
+		sessionFactory.getCurrentSession().delete(user);
+	}
+
+	@Transactional
+	public User getUser(String username) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(User.class);
+		c.add(Restrictions.eq("username", username));
+		User user=(User)c.uniqueResult();
+		return user;
+	}
+	@Transactional
+	public User viewUser(int userid) {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(User.class);
+		c.add(Restrictions.eq("userid", userid));
+		User blog=(User) c.uniqueResult();
+		return blog;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<User> UserList() {
+		Criteria c=sessionFactory.getCurrentSession().createCriteria(User.class);
+		List<User> l = c.list();
+		return l;
+	}
+
+	public boolean registerUser(User user) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public User login(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isUsernameValid(String username) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isEmailValid(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
+
+
+
+
+
+	/*
+	 @Autowired
 	SessionFactory sessionFactory;
 	public UserDAOImpl(SessionFactory sessionFactory)
 	{
@@ -38,40 +105,7 @@ public class UserDAOImpl implements UserDAO{
 		}
 	}
 
-	public boolean createUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public User getUser(int userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public List<User> getUsers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean approveUser(User user) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean editUser(int userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deleteUser(int userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isUsernameValid(String username) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	public boolean registerUser(User user) {
 		Session session=sessionFactory.getCurrentSession();
@@ -126,4 +160,5 @@ public class UserDAOImpl implements UserDAO{
 		
 		}
 	
-}
+	
+}*/

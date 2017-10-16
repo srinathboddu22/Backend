@@ -22,7 +22,7 @@ public class ForumDAOImpl implements ForumDAO {
 		this.sessionFactory=sessionFactory;
 	}
 	@Transactional
-	public boolean createForum(Forum forum)
+	public boolean createNewForum(Forum f)
 	{
 	try
 	{
@@ -50,7 +50,7 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 	@Transactional
-	public List<Forum> getForum() {
+	public List<Forum> getForumList(String userName) {
 		
 		 @SuppressWarnings("unchecked")
 		List<Forum> listForum = (List<Forum>) sessionFactory.getCurrentSession().createQuery("from Forum");
@@ -96,12 +96,12 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 	@Transactional
-	public boolean deleteForum(int forumId) {
+	public boolean delete(int fid) {
 		
 		try
 		{
 			
-		Query query =	(Query)sessionFactory.getCurrentSession().createQuery("delete Forum where forumId="+forumId);
+		Query query =	(Query)sessionFactory.getCurrentSession().createQuery("delete Forum where forumId="+fid);
 		query.executeUpdate();	
 		return true;
 		}
@@ -111,4 +111,18 @@ public class ForumDAOImpl implements ForumDAO {
 			return false;
 		}
 	}
+	public boolean createForum(Forum forum) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	public List<Forum> getForum() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public boolean deleteForum(int forumId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	 
 }

@@ -21,7 +21,7 @@ public class BlogDAOImpl implements BlogDAO {
 		this.sessionFactory=sessionFactory;
 	}
 	@Transactional
-	public boolean createBlog(Blog blog)
+	public boolean createNewBlog(Blog blog)
 	{
 	try
 	{
@@ -53,7 +53,7 @@ public class BlogDAOImpl implements BlogDAO {
 		}
 	}
 	@Transactional
-	public List<Blog> getBlogs() {
+	public List<Blog> getBlogList(String bUserName) {
 		
 		 @SuppressWarnings("unchecked")
 		List<Blog> listBlog = (List<Blog>) sessionFactory.getCurrentSession().createQuery("from Blog");
@@ -114,5 +114,7 @@ public class BlogDAOImpl implements BlogDAO {
 			return false;
 		}
 	}
+	
+	
 
 }

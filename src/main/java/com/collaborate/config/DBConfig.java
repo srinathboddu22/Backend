@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.collaborate.DAO.BlogDAO;
 import com.collaborate.DAO.BlogDAOImpl;
 import com.collaborate.Model.Blog;
+import com.collaborate.Model.BlogPost;
 import com.collaborate.Model.Forum;
+import com.collaborate.Model.User;
 
 @Configuration
 @ComponentScan("com.collaborate")
@@ -44,13 +46,23 @@ public class DBConfig {
 		properties.put("hibernate.hbm2ddl.auto", "create");
 		System.out.println("Hibernate Properties");
 		return properties;
-
-	}
+		}
+		
 	@Bean
-      public SessionFactory getSessionFactory()
+    public SessionFactory SessionFactory()
      {
 	LocalSessionFactoryBuilder localsessionFactory = new LocalSessionFactoryBuilder(getDataSource());
-	localsessionFactory.addProperties(getHibernateProperties());
+    Properties hibernateProperties=new Properties();
+	
+    hibernateProperties.setProperty("hibernate.dialect","org.hibernate.dialect.Oracle10gDialect");
+    hibernateProperties.setProperty("hibernate.hbm2ddl.auto","update");
+    hibernateProperties.setProperty("hibernate.show_sql","true");
+    localsessionFactory.addProperties(hibernateProperties);
+    Class classes[]=new Class[]{User.class,BlogPost.class};
+    
+    
+	
+    localsessionFactory.addProperties(getHibernateProperties());
 	localsessionFactory.addAnnotatedClass(Blog.class);
 	localsessionFactory.addAnnotatedClass(Forum.class);
 	System.out.println("Session created");
@@ -58,9 +70,8 @@ public class DBConfig {
       }
 
       @Bean
-      public HibernateTransactionManager getTransaction(SessionFactory sessionFactory)
-      {
-    	 	System.out.println("Transaction");
+      public HibernateTransactionManager getTransaction(SessionFactory sessionFactory){
+          	 	System.out.println("Transaction");
 		    return new HibernateTransactionManager(sessionFactory);
       }
  
