@@ -6,13 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 @Entity
-@Table(name="Friend_details")
-@Component
-public class Friend {
-
+@Table(name="friend")
+public class Friend
+{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 
@@ -45,5 +42,4 @@ public class Friend {
 	public void setStatus(char status) {
 		this.status = status;
 	}
-	
 }

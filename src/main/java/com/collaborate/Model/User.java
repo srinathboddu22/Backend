@@ -1,88 +1,102 @@
 package com.collaborate.Model;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
 
 @Entity
-@Table(name = "UserDetails")
-public class User {
-
+public class User 
+{
 	@Id
-	@GeneratedValue
-	private int userid;
-	private String username;
-	private String name;
-	private String password;
-	private String gender;
-	private String email;
-	private String mobile;
-	private String Enabled;
-	private String role;
-	private byte[] image;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
-	public int getUserid() {
-		return userid;
+	private String firstname;
+	
+	private String lastname;
+	
+	private String email;
+	
+	private String username;
+	
+	private String password;
+
+	private String role;
+	@Column(name="on_line")
+	private boolean online;
+
+	private boolean enabled;
+	public String getFirstname() 
+	{
+		return firstname;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setFirstname(String firstname) 
+	{
+		this.firstname = firstname;
 	}
-	public String getUsername() {
-		return username;
+	public String getLastname() 
+	{
+		return lastname;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLastname(String lastname) 
+	{
+		this.lastname = lastname;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public String getEmail() {
+	public String getEmail() 
+	{
 		return email;
 	}
-	public void setEmail(String email) {
+	public void setEmail(String email) 
+	{
 		this.email = email;
 	}
-	public String getMobile() {
-		return mobile;
+	public String getUsername() 
+	{
+		return username;
 	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setUsername(String username) 
+	{
+		this.username = username;
 	}
-	public String getEnabled() {
-		return Enabled;
+	public String getPassword() 
+	{
+		return password;
 	}
-	public void setEnabled(String enabled) {
-		Enabled = enabled;
+	public void setPassword(String password) 
+	{
+		this.password = password;
 	}
-	public String getRole() {
+	public String getRole() 
+	{
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(String role) 
+	{
 		this.role = role;
 	}
-	public byte[] getImage() {
-		return image;
+	public boolean isOnline() 
+	{
+		return online;
 	}
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setOnline(boolean online) 
+	{
+		this.online = online;
 	}
-
+	public boolean isEnabled() 
+	{
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) 
+	{
+		this.enabled = enabled;
+	}
 }
